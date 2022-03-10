@@ -1,0 +1,42 @@
+﻿@model List<PessoaModel>
+@{
+    ViewData["Title"] = "Pessoas";
+}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="btn btn-primary" role="button" asp-controller="Pessoas" asp-action="Criar">Novo Cadastro</a>
+</div>
+
+<h1>Pessoas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Celular</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null & Model.Any())
+        {
+            foreach (var pessoa in Model)
+            {
+                <tr>
+                    <th scope="row">@pessoa.Id</th>
+                    <td>@pessoa.Nome @pessoa.Sobrenome</td>
+                    <td>@pessoa.CPF</td>
+                    <td>@pessoa.Celular</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a role="button" class="btn btn-primary" asp-route-Id="@pessoa.Id" asp-controller="Pessoas" asp-action="Editar">Editar</a>
+                            <a role="button" class="btn btn-danger" asp-route-Id="@pessoa.Id" asp-controller="Pessoas" asp-action="Apagar">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
